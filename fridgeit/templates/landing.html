@@ -27,7 +27,8 @@
 
       .hero-unit {
         height:200px;
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: rgba(0, 0, 0, 0.2);
+        width:400px;
       }
     </style>
 
@@ -59,18 +60,18 @@
             <ul class="nav">
               <li></li>
             </ul>
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="FakeEmail">
-              <input class="span2" type="password" placeholder="FakePassword">
-              <!-- <button type="submit" class="btn">Sign in</button> -->
-              <a href="index.html" class="btn" type="submit">Sign in</a>
+            <form class="navbar-form pull-right" method="post" action={% url "login" %}> {% csrf_token %}
+              <input class="span2" type="text" name="email" placeholder="FakeEmail">
+              <input class="span2" type="password" name="password" placeholder="FakePassword">
+               <button type="submit" class="btn">Sign in</button> 
+    <!--       <a href={% url "login" %} class="btn" type="submit">Sign in</a>-->
             </form>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
     <div class="container">
-    <div class="hero-unit">
+    <div class="hero-unit" style="color:#000000;">
   <h1>Fridgitage</h1>
   <p>The smart fridge you need</p>
   <p>
@@ -86,7 +87,7 @@
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'jquery.backstretch.min.js' %}"></script>
         <script type="text/javascript">
-        $.backstretch("{% static 'eat-food-fruits-pictures-orangeis_and_lemons.jpg' %}");
+        $.backstretch("{% static 'kebabs.jpg' %}");
         </script>
 </body>
 </html>
