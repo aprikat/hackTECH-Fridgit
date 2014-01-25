@@ -62,8 +62,12 @@ WSGI_APPLICATION = 'fridgeit.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_PATH, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'fridgeit',
+	'USER': 'website',
+	'PASSWORD': 'icecold',
+	'HOST': 'localhost',
+	'PORT': '3306',
     }
 }
 
