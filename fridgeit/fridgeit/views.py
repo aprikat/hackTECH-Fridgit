@@ -11,3 +11,9 @@ def logout_page(request):
 	
 def index(request):
 	return render(request, 'index.html')
+<<<<<<< Updated upstream
+=======
+
+def signup(request):
+	return render(request, 'signup.html')
+>>>>>>> Stashed changes

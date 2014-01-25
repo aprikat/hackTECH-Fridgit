@@ -24,12 +24,8 @@
       background-color: #7171C6;
       font-color: #FFFFFF;
       }
-
-      .hero-unit {
-        height:200px;
-        background-color: rgba(0, 0, 0, 0.05);
-      }
     </style>
+
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -57,66 +53,22 @@
           <a class="brand" href= {% url "home" %} >Fridgitage</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li></li>
+              <li><a href={% url "home" %}></a></li>
             </ul>
             <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="FakeEmail">
-              <input class="span2" type="password" placeholder="FakePassword">
-              <!-- <button type="submit" class="btn">Sign in</button> -->
+              <input class="span2" type="text" name="email" placeholder="email">
+              <input class="span2" type="password" name="password" placeholder="password">
               <a href="index.html" class="btn" type="submit">Login</a>
             </form>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
-    <div class="container">
-    <div class="hero-unit">
-  <h1>Fridgitage</h1>
-  <p>The smart fridge for smart people</p>
-  <p>
-    <button class="btn btn-success btn-large" data-toggle="modal" data-target="#signupModal">
-      Sign up
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Sign up for Fridgitage</h4>
-          </div>
-          <div class="modal-body">
-            <form role="form">
-              <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="april@sleepdeprived.com">
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="help911">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <a href="#" class="btn btn-success">Sign up</a>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+  <div class="container">
+    
+    </div>
 
 
-  </p>
-</div>
-</div>
-  
-
-        <script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'jquery.backstretch.min.js' %}"></script>
-        <script type="text/javascript">
-        $.backstretch("{% static 'eat-food-fruits-pictures-orangeis_and_lemons.jpg' %}");
-        </script>
 </body>
 </html>
