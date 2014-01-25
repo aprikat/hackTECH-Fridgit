@@ -1,5 +1,7 @@
-Pinterest
+Pinterest 
 =========
+
+Tanya put this here!
 
 A Pythonic client for the Pinterest API
 
