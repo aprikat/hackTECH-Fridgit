@@ -64,8 +64,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fridgeit',
-	'USER': 'website',
-	'PASSWORD': 'icecold',
+	'USER': 'root',
+	'PASSWORD': '',
 	'HOST': 'localhost',
 	'PORT': '3306',
     }
@@ -89,3 +89,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(
+        os.path.dirname(__file__),
+        'static',
+    ),
+)
