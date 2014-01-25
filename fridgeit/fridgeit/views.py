@@ -20,3 +20,8 @@ def index(request):
 
 def signup(request):
 	return render(request, 'signup.html')
+
+
+def signup(request):
+	return render(request, 'signup.html')
+
