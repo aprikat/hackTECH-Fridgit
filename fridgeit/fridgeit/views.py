@@ -13,9 +13,12 @@ def home(request):
 	return render(request, 'landing.html')
 def login(request):
 	if request.method =="POST":
-		email = request.POST['email']
-		password = request.POST['password']
-		print email, password
+		email = request.POST.get('email')
+		password = request.POST.get('password')
+		user = authenticate(email=email, password=password)
+		if user is not None:
+			if user.is_active:
+				login(request, user)
 	return HttpResponseRedirect('/')
 
 def logout_page(request):
@@ -40,4 +43,3 @@ def get_recipe(request):
 	#Pinterest API calls (or Food 2 Fork)
 	result = search.user_pin("kittens")
 	return render(request, 'recipes.html')
-
