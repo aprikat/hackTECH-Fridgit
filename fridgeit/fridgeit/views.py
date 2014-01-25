@@ -25,3 +25,7 @@ def signup(request):
 def signup(request):
 	return render(request, 'signup.html')
 
+def get_recipe(request):
+	# make an API call to Pinterest and Food2Fork
+	return blah
+
