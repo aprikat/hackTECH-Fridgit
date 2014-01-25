@@ -2,6 +2,12 @@ from django.shortcuts import render
 from django.contrib.auth import logout, login
 from django.http import HttpResponseRedirect
 from fridgeit.models import User
+from pinterest.models.model import Pinterest
+import pinterest.search as search
+
+CLIENT_ID = "1435790"
+CLIENT_SECRET = "8c8eab09fe710377c9e879872855109c9f349195"
+Pinterest.configure_client(CLIENT_ID, CLIENT_SECRET)
 
 def home(request):
 	return render(request, 'landing.html')
@@ -27,11 +33,11 @@ def index(request):
 def signup(request):
 	return render(request, 'signup.html')
 
-
 def signup(request):
 	return render(request, 'signup.html')
 
 def get_recipe(request):
-	# make an API call to Pinterest and Food2Fork
-	return blah
+	#Pinterest API calls (or Food 2 Fork)
+	#result = search.user_pin("kittens")
+	return render(request, 'recipes.html')
 

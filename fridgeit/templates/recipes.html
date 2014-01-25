@@ -56,9 +56,7 @@
               <li><a>Mah food</a></li>
             </ul>
             <form class="navbar-form pull-right">
-              <a href={% url "login" %} class="btn">Sign in</a>
               <ul class="nav">
-              <li><a>Welcome, user!</a></li>
               <li><a href="#">Your account</a></li>
             </ul>
             </form>
@@ -69,32 +67,23 @@
   <div class="container">
     <div class="row">
         <div class="span10 offset1">
-          <h4>Currently in your fridge</h4>
+          <h4>Recipes you can try</h4>
           <table class="table table-hover">
         <thead>
-              <th>Item</th>
-              <th>Quantity</th>
-              <th>Expiration date</th>
-              <th><a href="#" class="btn btn-small btn-success">Find recipes!</a></th>
+              <th>Recipe</th>
+              <th>Ingredients</th>
+              <th>% Match</th>
           </thead>
           <tbody>
-            <tr>
-              <td><input type="text" placeholder="New item"></input></td>
-              <td><input type="text" placeholder="Quantity"></input></td>
-              <td><input type="text" placeholder="Date purchased"></input></td>
-              <td><a href="#" class="btn btn-small btn-success">Add it!</a></td>
-            </tr>
               <tr>
-                <td>Jose Cuervo</td>
-                <td>2</td>
-                <td>Never</td>
-                <td><a href="#" class="btn btn-small btn-danger">Chyeah</a></td>
+                <td>Lasagna</td>
+                <td>Elbow macaroni, cheese, marinara sauce</td>
+                <td>90%</td>
               </tr>
               <tr>
-              <td>Doritos</td>
-                <td>3</td>
-                <td>2/24/14</td>
-                <td><a href="#" class="btn btn-small btn-danger">Chyeah</a></td>
+              <td>Tacos</td>
+                <td>Taco shell, ground beef, lettuce, tomatoes, shredded cheddar cheese, sour cream</td>
+                <td>65%</td>
               </tr>
         </tbody>
       </table>
