@@ -65,8 +65,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fridgeit',
-	'USER': 'root',
-	'PASSWORD': '',
+	'USER': 'website',
+	'PASSWORD': 'icecold',
 	'HOST': 'localhost',
 	'PORT': '3306',
     }
