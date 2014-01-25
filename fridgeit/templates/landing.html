@@ -63,7 +63,11 @@
               <input class="span2" type="text" name="email" placeholder="FakeEmail">
               <input class="span2" type="password" name="password" placeholder="FakePassword">
               <!-- <button type="submit" class="btn">Sign in</button> -->
+<<<<<<< HEAD
               <a href={% url "login" %} class="btn" type="submit">Sign in</a>
+=======
+              <a href="index.html" class="btn" type="submit">Login</a>
+>>>>>>> f5fb43854a3167a770ec351c9259cec553f1c9e3
             </form>
           </div><!--/.nav-collapse -->
         </div>
@@ -72,11 +76,41 @@
     <div class="container">
     <div class="hero-unit">
   <h1>Fridgitage</h1>
-  <p>The smart fridge you need</p>
+  <p>The smart fridge for smart people</p>
   <p>
-    <a class="btn btn-success btn-large">
+    <button class="btn btn-success btn-large" data-toggle="modal" data-target="#signupModal">
       Sign up
-    </a>
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Sign up for Fridgitage</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="april@sleepdeprived.com">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="help911">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <a href="#" class="btn btn-success">Sign up</a>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
   </p>
 </div>
 </div>

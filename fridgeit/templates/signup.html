@@ -53,56 +53,19 @@
           <a class="brand" href= {% url "home" %} >Fridgitage</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a>Mah food</a></li>
+              <li><a href={% url "home" %}></a></li>
             </ul>
             <form class="navbar-form pull-right">
-<<<<<<< Updated upstream
-              <a href={% url "login" %} class="btn">Sign in</a>
-=======
-              <ul class="nav">
-              <li><a>Welcome, user!</a></li>
-              <li><a href="#">Your account</a></li>
-            </ul>
->>>>>>> Stashed changes
+              <input class="span2" type="text" name="email" placeholder="email">
+              <input class="span2" type="password" name="password" placeholder="password">
+              <a href="index.html" class="btn" type="submit">Login</a>
             </form>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
   <div class="container">
-    <div class="row">
-        <div class="span10 offset1">
-          <h4>Currently in your fridge</h4>
-          <table class="table table-hover">
-        <thead>
-              <th>Item</th>
-              <th>Quantity</th>
-              <th>Expiration date</th>
-              <th>Find recipes!</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="text" placeholder="New item"></input></td>
-              <td><input type="text" placeholder="Quantity"></input></td>
-              <td><input type="text" placeholder="Date purchased"></input></td>
-              <td><a href="#" class="btn btn-small btn-success">Add it!</a></td>
-            </tr>
-              <tr>
-                <td>Jose Cuervo</td>
-                <td>2</td>
-                <td>Never</td>
-                <td><a href="#" class="btn btn-small btn-danger">Chyeah</a></td>
-              </tr>
-              <tr>
-              <td>Doritos</td>
-                <td>3</td>
-                <td>2/24/14</td>
-                <td><a href="#" class="btn btn-small btn-danger">Chyeah</a></td>
-              </tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
+    
     </div>
 
 

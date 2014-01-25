@@ -17,3 +17,6 @@ def logout_page(request):
 	
 def index(request):
 	return render(request, 'index.html')
+
+def signup(request):
+	return render(request, 'signup.html')
