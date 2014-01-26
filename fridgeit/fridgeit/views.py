@@ -50,6 +50,9 @@ def index(request):
 def signup(request):
 	return render(request, 'signup.html')
 
+def landing(request):
+	return render(request, 'landing.html')
+
 def get_food(request):
 	userId = request.GET.get('user_id')
 	foods = Food.objects.filter(user=userId)
@@ -62,7 +65,7 @@ def get_recipe(request):
 		print(request.params.ingredients)
 	#get ingredients
 	#ingredients = ['chocolate', 'strawberry', 'cream']'
-	#ingredients = ['avocado', 'chocolate', 'lettuce']
+	ingredients = ['avocado', 'chocolate', 'lettuce']
 	#ingredients = ['egg', 'pineapple', 'lettuce', 'vodka', 'dog food', 'unicorn']
 	size = len(ingredients)
 	pin_name = []

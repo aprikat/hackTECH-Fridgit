@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^$', 'fridgeit.views.index', name='index'),
     url(r'^signup', 'fridgeit.views.signup', name='signup'),
     url(r'^get_food', 'fridgeit.views.get_food', name='get_food'),
+    url(r'^landing', 'fridgeit.views.landing', name='landing'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -63,8 +63,7 @@
             <form class="navbar-form pull-right">
               <!--<a href={% url "login" %} class="btn">Sign in</a> -->
               <ul class="nav">
-              <li><a>Welcome, {{ user }}!</a></li>
-              <li><a href="#">Your account</a></li>
+              <li><a href="landing.html">Log Out</a></li>
             </ul>
             </form>
           </div><!--/.nav-collapse -->
@@ -74,7 +73,7 @@
   <div class="container">
     <div class="row">
         <div class="span10 offset1">
-          <div class="row"><h4>Fridgit Inventory</h4></div>
+          <div class="row"><h3>Fridgit Inventory for {{ user }}</h3></div>
           <table class="table table-hover" id="food_table">
         <thead>
               <th></th>
@@ -110,7 +109,7 @@
 
       <div class="row" align="center">
         
-        <input type="submit" value="Find recipes!" class="btn btn-danger" id="get_recipe"></input>
+        <a href="recipes.html" type="submit" value="Find recipes!" class="btn btn-danger" id="get_recipe">Find recipes!</a>
       
       </div>
     </div>
