@@ -66,6 +66,7 @@
             <form class="navbar-form pull-right">
               <!--<a href={% url "login" %} class="btn">Sign in</a> -->
               <ul class="nav">
+              <li><a>Welcome, {{ user }}!</a></li>
               <li><a href="landing.html">Log Out</a></li>
             </ul>
             </form>
@@ -76,8 +77,11 @@
   <div class="container">
     <div class="row">
         <div class="span10 offset1">
-          <div class="row"><h3>Fridgit Inventory for {{ user }}</h3></div>
+          <div class="row"><h3>Fridgit Inventory {{ user }}</h3></div>
+          <form id="checkbox_form" action="/recipes/" method="post">{% csrf_token %}
+            {{ form.as_p }}
           <table class="table table-hover" id="food_table">
+
         <thead>
               <th>Item</th>
               <th>Quantity</th>
@@ -95,38 +99,42 @@
             </form>
         </tbody>
       </table>
-
-      <div class="row" align="center">
-        
-        <a href="recipes.html" type="submit" value="Find recipes!" class="btn btn-danger" id="get_recipe">Find recipes!</a>
-      
-      </div>
+      <input type="hidden" id="hidden_ings" name="ingreds" value="">
+      <div class="row" align="center"><input type="submit" class="btn btn-danger" id="get_recipe" value="Find recipes!"></div>
+    </form> <!-- ends the checkbox form -->
     </div>
     </div>
     </div>
-         <script type="text/javascript">
-           $(document).ready(function(){
-             $("#get_recipe").click(function() {
-               var ingredients = new Array();
-               $('tr .recipe_list').each(function() {
-                   if(this.checked) {
-                       var td = $(this).parent().parent().html();
-                       var nextd = $(td).next().html();
-                       ingredients.push(nextd);
-                   }
-               });
-               if (ingredients.length > 5)
-                 alert("Sorry, please limit your selection to 5 items!");
-               else {
-                 var url = '/recipes';
-                 //$.post(url, { ingredients: ingredients, csrfmiddlewaretoken: csrftoken });
-                 //make post request here
-               }
-
-             });            
-           });
-         </script>
-
+        <script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $("#get_recipe").click(function() {
+              var ingredients = new Array();
+              $('tr .recipe_list').each(function() {
+                  if(this.checked) {
+                      //var td = $(this).parent().parent().html();
+                      //var nextd = $(td).next().html();
+                      //ingredients.push(nextd);
+                      var val = $(this).parent().html();
+                      var val_s = val.toString();
+                      var thing = val_s.split(">")[1];
+                      ingredients.push(thing);
+                  }
+              });
+              if (ingredients.length > 5) {
+                alert("Sorry, please limit your selection to 5 items!");
+              }
+              else {
+                //ing_string = ingredients.toString();
+                document.getElementById("hidden_ings").value = ingredients;
+                document.getElementById("hidden_ings").innerHTML = ing_string;
+                $("#hidden_ings").text(ing_string);
+                alert(ingredients);
+              }
+            });            
+          });
+        </script>
         <script type="text/javascript">
         $(document).ready(function(){
           $('#food_table').on('click', '#delete', function(){
@@ -180,17 +188,14 @@
               alert("Sorry, please enter a date of purchase for your item.");
               exit();
             }
-              var row = table.insertRow(2);
-              var cell1 = row.insertCell(0);
-              var cell2 = row.insertCell(1);
-              var cell3 = row.insertCell(2);
-              var cell4 = row.insertCell(3);
-              var cell5 = row.insertCell(4);
-              cell1.innerHTML = "<input type=\"checkbox\" id=\"recipe_list\" class=\"recipe_list\">";
-              cell2.innerHTML = n;
-              cell3.innerHTML = q;
-              cell4.innerHTML = d;
-              cell5.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            cell1.innerHTML = "<div class=\"checkbox\"><label><input type=\"checkbox\" id=\"recipe_list\" class=\"recipe_list\">"+n+"</label></div>";
+            cell2.innerHTML = q;
+            cell3.innerHTML = d;
+            cell4.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
           }
         </script>
 </body>

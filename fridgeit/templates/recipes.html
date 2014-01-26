@@ -78,14 +78,12 @@
               <thead>
                 <th style="width: 15%">Image</th>
                 <th style="width: 75%">Recipe</th>
-                <th style="width: 10%">Match</th>
               </thead>
               <tbody>
                 {% for x in quartile %}
                   <tr>
                     <td><a target="_blank" href="{{links.pop}}"><img src="{{urls.pop}}" class="img-rounded"></a></td>
                     <td>{{ names.pop }}</td>
-                    <td>{{ match.pop }} %</td>
                   </tr>
                 {% endfor %}
             {% endif %}

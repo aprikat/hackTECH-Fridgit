@@ -102,72 +102,32 @@ def add_food(request):
         return HttpResponse(response, mimetype="application/json")
 
 def get_recipe(request):
-	#get ingredients
-	#ingredients = ['chocolate', 'strawberry', 'cream']
-	ingredients = ['avocado', 'chocolate', 'lettuce']
-	#ingredients = ['egg', 'pineapple', 'lettuce', 'vodka', 'dog food', 'unicorn']
-	size = len(ingredients)
-	pin_name = []
-	pin_url = []
-	pin_link = []
-	pin_match = []
-	
-	results = search_pins(ingredients, size)
-	pins_found = len(results)
+	#print request.POST
+    ingredients = request.POST.get("ingreds")
+    print ingredients
 
-	if pins_found>=25 :
-		copy_results(results, pin_name, pin_url, pin_link)
-		calculate_match(results, pin_match, len(ingredients), len(ingredients))
-		reverse_lists(pin_name, pin_url, pin_link, pin_match)
-		return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'links': pin_link, 'match': pin_match, 'quartile': range(0, len(results)), 'empty': False})
-	else :
-		copy_results(results, pin_name, pin_url, pin_link)
-		calculate_match(results, pin_match, len(ingredients), len(ingredients))
-		
-		results = search_pins(ingredients, size-1)
-		copy_results(results, pin_name, pin_url, pin_link)
-		calculate_match(results, pin_match, len(ingredients), len(ingredients)-1)
-		
-		pins_found = len(results)
-		reverse_lists(pin_name, pin_url, pin_link, pin_match)
+    results = search.pins(query="chicken", rich_type="recipe", rich_query=ingredients, restrict="food_drink", boost="quality")
+    pins_found = len(results)
+    pin_name = []
+    pin_url = []
+    pin_link = []
 
-		if pins_found==0 :	
-			return render(request, 'recipes.html', {'empty': True})
-		else :
-			return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'links': pin_link, 'match': pin_match, 'quartile': range(0, len(results)), 'empty': False})
-	#Pinterest API calls (or Food 2 Fork)
-	#result = search.user_pin("kittens")
-	return render(request, 'recipes.html')
-def search_pins(ingredients, size):
-	#convert ingredients to string query
-	query = ""
-	for i in range(0, size):
-		query = query + ingredients[i] + " "
+    for x in range (0, pins_found):
+        pin_name.append(results[x].description)
+        pin_url.append(results[x].image_large_url)
+        pin_link.append(results[x].link)
 
-	#prepare search results
-	results = search.pins(query="fudge", rich_type="recipe", rich_query=query, restrict="food_drink", boost="quality")
-	return results
+    reverse_lists(pin_name, pin_url, pin_link)
 
-def copy_results(results, pin_name, pin_url, pin_link):
-	for x in range (0, len(results)):
-		pin_name.append(results[x].description)
-		pin_url.append(results[x].image_medium_url)
-		pin_link.append(results[x].link)
+    if pins_found == 0 :
+    	return render(request, 'recipes.html', {'empty': True})
+    else :
+    	return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'links': pin_link, 'quartile': range(0, pins_found)})
 
-def calculate_match(results, pin_match, num_ing, num_search):
-	percent = 1.0*num_search/num_ing*100
-	percent = "{0:.2f}".format(percent)
-
-	for x in range (0, len(results)):
-		pin_match.append(percent)
-
-	print(pin_match)
-
-def reverse_lists(pin_name, pin_url, pin_link, pin_match):
+def reverse_lists(pin_name, pin_url, pin_link):
 	pin_name.reverse()
 	pin_url.reverse()
 	pin_link.reverse()
-	pin_match.reverse()
 
 
 
