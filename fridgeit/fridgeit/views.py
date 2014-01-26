@@ -46,32 +46,46 @@ def signup(request):
 
 def get_recipe(request):
 	#get ingredients
-	#ingredients = ['chocolate', 'strawberry', 'cream']
-	ingredients = ['avocado', 'egg', 'milk', 'chocolate', 'strawberry']
+	ingredients = ['chocolate', 'strawberry', 'cream']
+	#ingredients = ['avocado', 'chocolate', 'milk']
+	#ingredients = ['egg', 'chocolate', 'pineapple', 'lettuce', 'ice cream', 'vodka', 'dog food', 'unicorn']
 	size = len(ingredients)
+	pin_name = []
+	pin_url = []
+	pin_link = []
 	
+	results = search_pins(ingredients, size)
+	pins_found = len(results)
+
+	if pins_found>=25 :
+		copy_results(results, pin_name, pin_url, pin_link)
+		return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'links': pin_link, 'quartile': range(0, len(results)), 'empty': False})
+	else :
+		copy_results(results, pin_name, pin_url, pin_link)
+		results = search_pins(ingredients, size-1)
+		copy_results(results, pin_name, pin_url, pin_link)
+		pins_found = len(results)
+
+		if pins_found==0 :	
+			return render(request, 'recipes.html', {'empty': True})
+		else :
+			return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'links': pin_link, 'quartile': range(0, len(results)), 'empty': False})
+
+def search_pins(ingredients, size):
 	#convert ingredients to string query
 	query = ""
 	for i in range(0, size):
 		query = query + ingredients[i] + " "
 
-	#prepare search results	
+	#prepare search results
 	results = search.pins(query="fudge", rich_type="recipe", rich_query=query, restrict="food_drink", boost="quality")
-	pin_name = []
-	pin_url = []
+	return results
 
-	print(len(results))
-
-	if len(results)>0 :
-		#convert results to be used in recipes.html
-		for x in range (0, len(results)):
-			pin_name.append(results[x].description)
-			pin_url.append(results[x].image_medium_url)
-
-		print(pin_url)
-		return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'quartile': range(0, len(results)), 'empty': False})
-	else :
-		return render(request, 'recipes.html', {'empty': True})
+def copy_results(results, pin_name, pin_url, pin_link):
+	for x in range (0, len(results)):
+		pin_name.append(results[x].description)
+		pin_url.append(results[x].image_medium_url)
+		pin_link.append(results[x].link)
 
 
 

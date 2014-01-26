@@ -68,7 +68,7 @@
         <div class="span10 offset1">
           {% if empty %}
               <h3>We're sorry, your search didn't return any results.</h3>
-              <h4><font color="gray">Why not try searching fewer ingredients?</font></h4>
+              <h4><font color="gray">Why not try searching with fewer ingredients?</font></h4>
               <a href="index.html" class="btn btn-default btn-primary">Search again!</a></td>
             {% else %}
               <h3>Recipes You Can Try</h3>
@@ -81,7 +81,7 @@
               <tbody>
                 {% for x in quartile %}
                   <tr>
-                    <td><img src="{{urls.pop}}" class="img-rounded"></td>
+                    <td><a target="_blank" href="{{links.pop}}"><img src="{{urls.pop}}" class="img-rounded"></a></td>
                     <td>{{ names.pop }}</td>
                     <td>99 %</td>
                   </tr>
