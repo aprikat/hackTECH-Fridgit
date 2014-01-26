@@ -10,7 +10,7 @@
 
     <!-- Le styles -->
 <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet"/>
-	
+  
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -24,6 +24,7 @@
       background-color: #7171C6;
       font-color: #FFFFFF;
       }
+      h4 .btn { display: inline-block; }
     </style>
 
 
@@ -50,15 +51,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href= {% url "home" %} >Fridgitage</a>
+          <a class="brand" href= {% url "home" %} >Fridgit</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a>Mah food</a></li>
             </ul>
             <form class="navbar-form pull-right">
-              <a href={% url "login" %} class="btn">Sign in</a>
+              <!--<a href={% url "login" %} class="btn">Sign in</a> -->
               <ul class="nav">
-              <li><a>Welcome, user!</a></li>
+              <li><a>Welcome, {{ user }}!</a></li>
               <li><a href="#">Your account</a></li>
             </ul>
             </form>
@@ -69,40 +69,90 @@
   <div class="container">
     <div class="row">
         <div class="span10 offset1">
-          <h4>Currently in your fridge</h4>
-          <table class="table table-hover">
+          <div class="row"><h4>Fridgit Inventory</h4></div>
+          <table class="table table-hover" id="food_table">
         <thead>
+              <th></th>
               <th>Item</th>
               <th>Quantity</th>
-              <th>Expiration date</th>
-              <th><a href="recipes.html" class="btn btn-small btn-success">Find recipes!</a>
-              </th>
+              <th>Purchase date</th>
+              <th></th>
           </thead>
           <tbody>
             <tr>
-              <td><input type="text" placeholder="New item"></input></td>
-              <td><input type="text" placeholder="Quantity"></input></td>
-              <td><input type="text" placeholder="Date purchased"></input></td>
-              <td><a href="#" class="btn btn-small btn-success">Add it!</a></td>
+              <td></td>
+              <td><input type="text" placeholder="New item" id="new_item_name"></input></td>
+              <td><input type="text" placeholder="Quantity" id="new_item_quant"></input></td>
+              <td><input type="text" placeholder="Date purchased" id="new_item_date"></input></td>
+              <td><a href="#" class="btn btn-small" id="addnew" onclick="populate_new();">Add</a></td>
             </tr>
               <tr>
-                <td>Jose Cuervo</td>
+                <td><input type="checkbox" id="ch1" class="recipe_list"></td>
+                <td class="item">Jose Cuervo</td>
                 <td>2</td>
                 <td>Never</td>
-                <td><a href="#" class="btn btn-small btn-danger">Chyeah</a></td>
+                <td><a href="#" class="btn btn-small" class="delete">Delete</a></td>
               </tr>
               <tr>
-              <td>Doritos</td>
-                <td>3</td>
-                <td>2/24/14</td>
-                <td><a href="#" class="btn btn-small btn-danger">Chyeah</a></td>
+                <td><input type="checkbox" id="ch2" class="recipe_list"></td>
+                <td class="item">Dead dove</td>
+                <td>1</td>
+                <td>Do not eat</td>
+                <td><a href="#" class="btn btn-small" class="delete">Delete</a></td>
               </tr>
         </tbody>
       </table>
-      </div>
+
+      <div class="row" align="center"><a href="#" class="btn btn-danger" id="get_recipe">Find recipes!</a></div>
+    </div>
     </div>
     </div>
 
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $("#get_recipe").click(function() {
+              var ingredients = new Array();
+              $('tr .recipe_list').each(function() {
+                  if(this.checked) {
+                      var td = $(this).parent().parent().html();
+                      var nextd = $(td).next().html();
+                      ingredients.push(nextd);
+                  }
+              });
+              if (ingredients.length > 5)
+                alert("Sorry, please limit your selection to 5 items!");
+              else 
+                return ingredients;
+            });
+
+            
+              $(".delete").live('click', function(event) {
+                $(this).parent().parent().remove();             
+            });
+          });
+        </script>
+
+
+        <script type="text/javascript">
+          function populate_new() {
+            var table = document.getElementById("food_table");
+            var n = document.getElementById("new_item_name").value;
+            var q = document.getElementById("new_item_quant").value;
+            var d = document.getElementById("new_item_date").value;
+            var row = table.insertRow(2);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            cell1.innerHTML = "<input type=\"checkbox\" id=\"recipe_list\" class=\"recipe_list\">";
+            cell2.innerHTML = n;
+            cell3.innerHTML = q;
+            cell4.innerHTML = d;
+            cell5.innerHTML = "<a href=\"#\" class=\"btn btn-small\" class=\"delete\">Delete</a>";
+          }
+        </script>
 </body>
 </html>
