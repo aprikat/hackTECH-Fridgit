@@ -10,7 +10,7 @@
 
     <!-- Le styles -->
 <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet"/>
-	
+  
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -41,6 +41,8 @@
   </head>
 
 <body>
+  <script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 
   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -50,14 +52,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href= {% url "home" %} >Fridgitage</a>
+          <a class="brand" href= {% url "home" %} >Fridgit</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a>Mah food</a></li>
             </ul>
             <form class="navbar-form pull-right">
               <ul class="nav">
-              <li><a href="#">Your account</a></li>
+              <li><a href="landing.html">Log Out</a></li>
             </ul>
             </form>
           </div><!--/.nav-collapse -->
@@ -67,28 +68,34 @@
   <div class="container">
     <div class="row">
         <div class="span10 offset1">
-          <h4>Recipes you can try</h4>
-          <table class="table table-hover">
-        <thead>
-              <th>Image</th>
-              <th>Recipe</th>
-              <th>Match</th>
-          </thead>
-          <tbody>
-              {% for x in quartile %}
-               <tr>
-                <td><img src="{{urls.pop}}"></td>
-                <td>{{ names.pop }}</td>
-                <td>99 %</td>
-              </tr>
-              {% endfor %}
+          {% if empty %}
+              <h3>We're sorry, your search didn't return any results.</h3>
+              <h4><font color="gray">Why not try searching with fewer ingredients?</font></h4>
+              <a href="index.html" class="btn btn-default btn-primary">Search again!</a></td>
+            {% else %}
+              <h3>Recipes You Can Try</h3>
+              <table class="table table-hover">
+              <thead>
+                <th style="width: 15%">Image</th>
+                <th style="width: 75%">Recipe</th>
+                <th style="width: 10%">Match</th>
+              </thead>
+              <tbody>
+                {% for x in quartile %}
+                  <tr>
+                    <td><a target="_blank" href="{{links.pop}}"><img src="{{urls.pop}}" class="img-rounded"></a></td>
+                    <td>{{ names.pop }}</td>
+                    <td>{{ match.pop }} %</td>
+                  </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
       </table>
       </div>
     </div>
     </div>
 
-
-        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        
 </body>
 </html>

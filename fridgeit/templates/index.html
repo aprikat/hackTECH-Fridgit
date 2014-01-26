@@ -31,6 +31,8 @@
     </style>
 
 
+
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
@@ -46,6 +48,9 @@
 
 <body>
 
+  
+  <script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -72,7 +77,7 @@
   <div class="container">
     <div class="row">
         <div class="span10 offset1">
-          <div class="row"><h3>Fridgit Inventory</h3></div>
+          <div class="row"><h3>Fridgit Inventory {{ user }}</h3></div>
           <form id="checkbox_form" action="/recipes/" method="post">{% csrf_token %}
             {{ form.as_p }}
           <table class="table table-hover" id="food_table">
@@ -89,7 +94,7 @@
               <td><input type="text" placeholder="New item" id="new_item_name"></input></td>
               <td><input type="text" placeholder="Quantity" id="new_item_quant"></input></td>
               <td><input type="text" placeholder="Date purchased" id="new_item_date"></input></td>
-              <td><a href="#" class="btn btn-small btn-success" id="addnew" onclick="populate_new();">Add</a></td>
+              <td><a href="#" class="btn btn-success" id="addnew" onclick="populate_new()" style="width:30px">Add</a></td>
             </tr>
               <tr>
                 <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Chicken breast</label></div></td>
@@ -124,7 +129,6 @@
     </div>
     </div>
     </div>
-
         <script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
         <script type="text/javascript">
@@ -159,7 +163,7 @@
         <script type="text/javascript">
         $(document).ready(function(){
           $('#food_table').on('click', '#delete', function(){
-              $(this).closest ('tr').remove ();
+              $(this).closest ('tr').remove();
           });
         });
         </script>
@@ -169,15 +173,31 @@
             var n = document.getElementById("new_item_name").value;
             var q = document.getElementById("new_item_quant").value;
             var d = document.getElementById("new_item_date").value;
-            var row = table.insertRow(2);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            cell1.innerHTML = "<div class=\"checkbox\"><label><input type=\"checkbox\" id=\"recipe_list\" class=\"recipe_list\">"+n+"</label></div>";
-            cell2.innerHTML = q;
-            cell3.innerHTML = d;
-            cell4.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
+
+            if(n=='') {
+              alert("Sorry, please enter a name for your item.");
+              exit();
+            }
+            if(q=='') {
+              alert("Sorry, please enter a quantity for your item.");
+              exit();
+            }
+            if(d=='') {
+              alert("Sorry, please enter a date of purchase for your item.");
+              exit();
+            }
+            
+              var row = table.insertRow(2);
+              var cell1 = row.insertCell(0);
+              var cell2 = row.insertCell(1);
+              var cell3 = row.insertCell(2);
+              var cell4 = row.insertCell(3);
+              var cell5 = row.insertCell(4);
+              cell1.innerHTML = "<input type=\"checkbox\" id=\"recipe_list\" class=\"recipe_list\">";
+              cell2.innerHTML = n;
+              cell3.innerHTML = q;
+              cell4.innerHTML = d;
+              cell5.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
           }
         </script>
 </body>
