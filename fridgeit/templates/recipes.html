@@ -74,16 +74,16 @@
               <h3>Recipes You Can Try</h3>
               <table class="table table-hover">
               <thead>
-                <th>Image</th>
-                <th>Recipe</th>
-                <th>Match</th>
+                <th style="width: 20%">Image</th>
+                <th style="width: 70%">Recipe</th>
+                <th style="width: 10%">Match</th>
               </thead>
               <tbody>
                 {% for x in quartile %}
                   <tr>
                     <td><a target="_blank" href="{{links.pop}}"><img src="{{urls.pop}}" class="img-rounded"></a></td>
                     <td>{{ names.pop }}</td>
-                    <td>99 %</td>
+                    <td>{{ match.pop }} %</td>
                   </tr>
                 {% endfor %}
             {% endif %}
