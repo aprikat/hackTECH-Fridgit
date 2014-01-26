@@ -16,16 +16,9 @@ CLIENT_SECRET = "8c8eab09fe710377c9e879872855109c9f349195"
 Pinterest.configure_client(CLIENT_ID, CLIENT_SECRET)
 
 from django.core.urlresolvers import reverse
-from fridgeit.models import User
-
+from django.contrib.auth.models import User
 def home(request):
 	return render(request, 'landing.html')
-
-def get_user(email):
-    try:
-        return User.objects.get(email=email.lower())
-    except User.DoesNotExist:
-        return None
 
 def userlogin(request):
 	if request.method =="POST":
@@ -44,9 +37,6 @@ def logout_page(request):
 	logout(request)
 	return HttpResponseRedirect('/')
 
-def index(request):
-	return render(request, 'index.html')
-
 def signup(request):
 	return render(request, 'signup.html')
 
@@ -56,6 +46,10 @@ def get_food(request):
 	response = serializers.serialize('json', foods, fields=('name','quantity'))
 	print "Response is: " + response
 	return HttpResponse(response, mimetype="application/json")
+
+	
+def index(request):
+	return render(request, 'index.html')
 
 def get_recipe(request):
 	#get ingredients

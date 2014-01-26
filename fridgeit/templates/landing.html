@@ -90,6 +90,7 @@
            </div>
            <div class="modal-body">
              <form role="form" action="/signup" method="post">
+{% csrf_token %} 
               <div class="form-group">
                  <label for="name">Full name</label>
                  <input type="text" class="form-control" id="name" placeholder="Sharkeshia Jaws">
@@ -125,11 +126,12 @@
 </div>
   
 
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'jquery.backstretch.min.js' %}"></script>
         <script type="text/javascript">
-        $.backstretch("{% static 'eat-food-fruits-pictures-orangeis_and_lemons.jpg' %}");
+        $.backstretch("{% static 'kebabs.jpg' %}");
         </script>
 </body>
 </html>
