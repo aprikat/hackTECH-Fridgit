@@ -46,8 +46,7 @@
   </head>
 
 <body>
-
-  <div class="navbar navbar-inverse navbar-fixed-top">
+ <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -58,17 +57,33 @@
           <a class="brand" href= {% url "home" %} >Fridgit</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li></li>
             </ul>
-            <form class="navbar-form pull-right" method="post" action={% url "login" %}> {% csrf_token %}
-              <input class="span2" type="text" name="username" placeholder="Username">
+            <form class="navbar-form pull-right" action= {% url "login" %} method="post">
+              <!--<a href={% url "login" %} class="btn">Sign in</a> -->
+              <ul class="nav">
+        {% if user.is_authenticated %}
+
+              <li><a>Welcome, {{ user }}!</a></li>
+              <li><a href={% url "index" %}>Your account</a></li>
+              <a href={% url "logout" %} class="btn">Logout</a>
+                                                 <a href="#">Your account</a>
+        {% else %}
+            {% csrf_token %}
+             <input class="span2" type="text" name="username" placeholder="Username">
               <input class="span2" type="password" name="password" placeholder="Password">
-               <button type="submit" class="btn">Sign in</button> 
+               <button type="submit" class="btn">Sign in</button>
+
+        {% endif %}
+       
+            </form>
+
+            </ul>
             </form>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
+
     <div class="container">
       <div class="row">
         <div class="span4">
@@ -76,47 +91,12 @@
   <h1>Fridgit</h1>
   <p>The smart fridge for smart people</p>
   <p>
-     <button class="btn btn-success btn-large" data-toggle="modal" data-target="#signupModal">
-        Sign up
-    </button>
     <a href={% url "signup" %} class="btn btn-success btn-large" >
-        Sign up 2
+        Sign up
     </a>
 
-    <!-- Modal -->
-     <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-       <div class="modal-dialog">
-         <div class="modal-content">
-           <div class="modal-header">
-             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-             <h4 class="modal-title" id="myModalLabel">Sign up for Fridgit</h4>
-           </div>
-           <div class="modal-body">
-             <form role="form">
-              <div class="form-group">
-                 <label for="name">Full name</label>
-                 <input type="text" class="form-control" id="name" placeholder="Sharkeshia Jaws">
-               </div>
-               <div class="form-group">
-                 <label for="email">Email address</label>
-                 <input type="email" class="form-control" id="email" placeholder="april@sleepdeprived.com">
-               </div>
-               <div class="form-group">
-                 <label for="password">Password</label>
-                 <input type="password" class="form-control" id="password" placeholder="help911">
-               </div>
-             </form>
-           </div>
-           <div class="modal-footer">
-             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-             <input type="submit" class="btn btn-success"></input>
-           </div>
-         </div><!-- /.modal-content -->
-       </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
 
-
-  </p>
+    
 </div>
 </div>
 <div class="span4 offset2">

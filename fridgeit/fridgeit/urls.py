@@ -11,8 +11,6 @@ urlpatterns = patterns('',
     url(r'^signup', 'fridgeit.views.signup', name='signup'),
     url(r'^validate/$', 'fridgeit.views.validate', name='validate'),
     url(r'^recipes', 'fridgeit.views.get_recipe', name='recipes'),
-    url(r'^signup', 'fridgeit.views.signup', name='signup'),
-    url(r'^get_food', 'fridgeit.views.get_food', name='get_food'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
