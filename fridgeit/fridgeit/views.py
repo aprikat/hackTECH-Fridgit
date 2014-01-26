@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
 import pinterest.search as search
+from django.shortcuts import render_to_response
 
 CLIENT_ID = "1435790"
 CLIENT_SECRET = "8c8eab09fe710377c9e879872855109c9f349195"
@@ -28,6 +29,8 @@ def get_user(email):
         return None
 
 def userlogin(request):
+	state = "Please log in"
+	username = password = ""
 	if request.method =="POST":
 		username = request.POST.get('username')
 		password = request.POST.get('password')
@@ -38,8 +41,14 @@ def userlogin(request):
 			if user.is_active:
 				login(request, user)
 				print "logged {} in ".format(user.username)
-				return HttpResponseRedirect('/index')
-	return HttpResponseRedirect('/')
+				state = "Successfully logged in"	
+			else:
+				state = "Account not active. "
+		else:
+			state = "Username/password incorrect."
+				# return HttpResponseRedirect('/index')
+	# return HttpResponseRedirect('/')
+	return render_to_response('signup.html',{'state':state, 'username': username})
 
 def logout_page(request):
 	logout(request)
