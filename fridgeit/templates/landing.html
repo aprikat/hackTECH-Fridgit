@@ -10,7 +10,7 @@
 
     <!-- Le styles -->
 <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet"/>
-	
+  
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -79,6 +79,9 @@
      <button class="btn btn-success btn-large" data-toggle="modal" data-target="#signupModal">
         Sign up
     </button>
+    <a href={% url "signup" %} class="btn btn-success btn-large" >
+        Sign up 2
+    </a>
 
     <!-- Modal -->
      <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -89,7 +92,7 @@
              <h4 class="modal-title" id="myModalLabel">Sign up for Fridgit</h4>
            </div>
            <div class="modal-body">
-             <form role="form" action="/signup" method="post">
+             <form role="form">
               <div class="form-group">
                  <label for="name">Full name</label>
                  <input type="text" class="form-control" id="name" placeholder="Tommy Trojan">
