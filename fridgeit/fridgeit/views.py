@@ -94,6 +94,8 @@ def delete_food(request):
 def add_food(request):
 	name = request.POST.get('food_name')
 	quantity = request.POST.get('quantity')
+        if name == None :
+	  return HttpResponse(response, mimetype="application/json")
 	userId = 1
         #userId = request.POST.get('user_id')
 	u = User.objects.get(id = userId)
@@ -128,15 +130,3 @@ def reverse_lists(pin_name, pin_url, pin_link):
 	pin_name.reverse()
 	pin_url.reverse()
 	pin_link.reverse()
-
-
-
-
-
-
-
-
-
-
-
-	
