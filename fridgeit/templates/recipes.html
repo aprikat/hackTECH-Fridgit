@@ -70,24 +70,20 @@
           <h4>Recipes you can try</h4>
           <table class="table table-hover">
         <thead>
+              <th>Image</th>
               <th>Recipe</th>
               <th>Ingredients</th>
               <th>Match</th>
           </thead>
           <tbody>
-              {% for x in range(3) %}
-              
+              {% for x in quartile %}
+               <tr>
+                <td>{{ urls.pop }}
+                <td>{{ names.pop }}</td>
+                <td>Ingredient</td>
+                <td>99 %</td>
+              </tr>
               {% endfor %}
-              <tr>
-                <td>Lasagna</td>
-                <td>Elbow macaroni, cheese, marinara sauce</td>
-                <td>90%</td>
-              </tr>
-              <tr>
-              <td>Tacos</td>
-                <td>Taco shell, ground beef, lettuce, tomatoes, shredded cheddar cheese, sour cream</td>
-                <td>65%</td>
-              </tr>
         </tbody>
       </table>
       </div>
