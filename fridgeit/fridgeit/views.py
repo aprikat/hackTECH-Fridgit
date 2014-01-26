@@ -24,6 +24,7 @@ def home(request):
 
 def userlogin(request):
 	if request.method =="POST":
+		print request.POST
 		username = request.POST.get('username')
 		password = request.POST.get('password')
 #		username = get_user(email)		
@@ -54,8 +55,12 @@ def get_food(request):
 def index(request):
 	return render(request, 'index.html')
 
+def signup(request):
+	return render(request, 'signup.html')
+
 def validate(request):
 	if request.method =="POST":
+		print(request.POST)
 		username = request.POST.get('username')
 		fullname = request.POST.get('name')
 		password = request.POST.get('password')
