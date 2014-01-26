@@ -64,7 +64,7 @@ def get_recipe(request):
 	if request.method == 'POST':
 		print(request.params.ingredients)
 	#get ingredients
-	#ingredients = ['chocolate', 'strawberry', 'cream']'
+	#ingredients = ['chocolate', 'strawberry', 'cream']
 	ingredients = ['avocado', 'chocolate', 'lettuce']
 	#ingredients = ['egg', 'pineapple', 'lettuce', 'vodka', 'dog food', 'unicorn']
 	size = len(ingredients)
