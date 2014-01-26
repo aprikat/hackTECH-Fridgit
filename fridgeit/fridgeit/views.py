@@ -104,7 +104,9 @@ def get_recipe(request):
 			return render(request, 'recipes.html', {'empty': True})
 		else :
 			return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'links': pin_link, 'match': pin_match, 'quartile': range(0, len(results)), 'empty': False})
-
+	#Pinterest API calls (or Food 2 Fork)
+	#result = search.user_pin("kittens")
+	return render(request, 'recipes.html')
 def search_pins(ingredients, size):
 	#convert ingredients to string query
 	query = ""
@@ -146,3 +148,4 @@ def reverse_lists(pin_name, pin_url, pin_link, pin_match):
 
 
 
+	
