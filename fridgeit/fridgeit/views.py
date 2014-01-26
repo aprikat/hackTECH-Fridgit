@@ -32,7 +32,7 @@ def userlogin(request):
 			if user.is_active:
 				login(request, user)
 				print "logged {} in ".format(user.username)
-				return HttpResponseRedirect('index')
+				return HttpResponseRedirect('/index')
 	return HttpResponseRedirect('/')
 
 def logout_page(request):
