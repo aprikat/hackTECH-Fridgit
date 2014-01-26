@@ -150,11 +150,11 @@
                 alert("Sorry, please limit your selection to 5 items!");
               }
               else {
-                ing_string = ingredients.toString();
-                document.getElementById("hidden_ings").value = ing_string;
+                //ing_string = ingredients.toString();
+                document.getElementById("hidden_ings").value = ingredients;
                 document.getElementById("hidden_ings").innerHTML = ing_string;
                 $("#hidden_ings").text(ing_string);
-                alert(ing_string);
+                alert(ingredients);
               }
             });            
           });
@@ -187,17 +187,15 @@
               exit();
             }
             
-              var row = table.insertRow(2);
-              var cell1 = row.insertCell(0);
-              var cell2 = row.insertCell(1);
-              var cell3 = row.insertCell(2);
-              var cell4 = row.insertCell(3);
-              var cell5 = row.insertCell(4);
-              cell1.innerHTML = "<input type=\"checkbox\" id=\"recipe_list\" class=\"recipe_list\">";
-              cell2.innerHTML = n;
-              cell3.innerHTML = q;
-              cell4.innerHTML = d;
-              cell5.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
+            var row = table.insertRow(2);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            cell1.innerHTML = "<div class=\"checkbox\"><label><input type=\"checkbox\" id=\"recipe_list\" class=\"recipe_list\">"+n+"</label></div>";
+            cell2.innerHTML = q;
+            cell3.innerHTML = d;
+            cell4.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
           }
         </script>
 </body>
