@@ -38,6 +38,6 @@ def signup(request):
 
 def get_recipe(request):
 	#Pinterest API calls (or Food 2 Fork)
-	#result = search.user_pin("kittens")
+	result = search.user_pin("kittens")
 	return render(request, 'recipes.html')
 
