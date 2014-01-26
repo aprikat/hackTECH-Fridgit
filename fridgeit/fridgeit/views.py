@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import logout, login, authenticate
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from fridgeit.models import User
 from pinterest.models.model import Pinterest, User
 from fridgeit.models import Food
@@ -20,10 +21,12 @@ from django.contrib.auth.models import User
 def home(request):
 	return render(request, 'landing.html')
 
+
 def userlogin(request):
 	if request.method =="POST":
 		username = request.POST.get('username')
 		password = request.POST.get('password')
+#		username = get_user(email)		
 		print username
 		user = authenticate(username = username, password=password)
 		if user is not None:
@@ -50,6 +53,22 @@ def get_food(request):
 	
 def index(request):
 	return render(request, 'index.html')
+
+def validate(request):
+	if request.method =="POST":
+		username = request.POST.get('username')
+		fullname = request.POST.get('name')
+		password = request.POST.get('password')
+		email = request.POST.get('email')
+		print username
+		fname,lname = fullname.split(" ")
+		newuser= User(username=username, first_name = fname, last_name = lname, email = email)
+		newuser.make_pasword(password)
+		newuser.save()
+		print newuser.first_name, newuser.last_name
+		print "Registered {}".format(newuser.username)
+		return HttpResponseRedirect('/index')
+	return HttpResponseRedirect('/')
 
 def get_recipe(request):
 	#get ingredients
