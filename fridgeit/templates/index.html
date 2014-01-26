@@ -25,6 +25,9 @@
       font-color: #FFFFFF;
       }
       h4 .btn { display: inline-block; }
+      .btn-small {
+        width:50px;
+      }
     </style>
 
 
@@ -59,7 +62,7 @@
               <!--<a href={% url "login" %} class="btn">Sign in</a> -->
               <ul class="nav">
               <li><a>Welcome, {{ user }}!</a></li>
-              <li><a href="#">Your account</a></li>
+              <li><a href="#">Your Account</a></li>
             </ul>
             </form>
           </div><!--/.nav-collapse -->
@@ -69,10 +72,9 @@
   <div class="container">
     <div class="row">
         <div class="span10 offset1">
-          <div class="row"><h4>Fridgit Inventory</h4></div>
+          <div class="row"><h3>Fridgit Inventory</h3></div>
           <table class="table table-hover" id="food_table">
         <thead>
-              <th></th>
               <th>Item</th>
               <th>Quantity</th>
               <th>Purchase date</th>
@@ -80,22 +82,19 @@
           </thead>
           <tbody>
             <tr>
-              <td></td>
               <td><input type="text" placeholder="New item" id="new_item_name"></input></td>
               <td><input type="text" placeholder="Quantity" id="new_item_quant"></input></td>
               <td><input type="text" placeholder="Date purchased" id="new_item_date"></input></td>
-              <td><a href="#" class="btn btn-small" id="addnew" onclick="populate_new();">Add</a></td>
+              <td><a href="#" class="btn btn-small btn-success" id="addnew" onclick="populate_new();">Add</a></td>
             </tr>
               <tr>
-                <td><input type="checkbox" id="ch1" class="recipe_list"></td>
-                <td class="item">Jose Cuervo</td>
+                <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Jose Cuervo</label></div></td>
                 <td>2</td>
                 <td>Never</td>
                 <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
               </tr>
               <tr>
-                <td><input type="checkbox" id="ch2" class="recipe_list"></td>
-                <td class="item">Dead dove</td>
+                <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Dead dove</label></div></td>
                 <td>1</td>
                 <td>Do not eat</td>
                 <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
@@ -147,12 +146,10 @@
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
             var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
-            cell1.innerHTML = "<input type=\"checkbox\" id=\"recipe_list\" class=\"recipe_list\">";
-            cell2.innerHTML = n;
-            cell3.innerHTML = q;
-            cell4.innerHTML = d;
-            cell5.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
+            cell1.innerHTML = "<div class=\"checkbox\"><label><input type=\"checkbox\" id=\"recipe_list\" class=\"recipe_list\">"+n+"</label></div>";
+            cell2.innerHTML = q;
+            cell3.innerHTML = d;
+            cell4.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
           }
         </script>
 </body>
