@@ -101,17 +101,42 @@ def validate(request):
 	return HttpResponseRedirect('/')
 
 def get_recipe(request):
-        print request.POST
-        ingredients = request.POST.get("ingreds")
-        print ingredients
 
-        #Pinterest API calls (or Food 2 Fork)
-        #results = search.pins(query="fudge", rich_type="recipe", rich_query="chocolate, strawberries, and cream")
-        results = search.pins(query="chicken", rich_type="recipe", rich_query=ingredients)
-        num_pins = len(results)
-        pin_name = []
-        pin_url = []
-        for x in range (0, len(results)):
-                pin_name.append(results[x].description)
-                pin_url.append(results[x].image_large_url)
-        return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'quartile': range(0, len(results))})
+	#print request.POST
+    ingredients = request.POST.get("ingreds")
+    print ingredients
+
+    results = search.pins(query="chicken", rich_type="recipe", rich_query=ingredients, restrict="food_drink", boost="quality")
+    pins_found = len(results)
+    pin_name = []
+    pin_url = []
+    pin_link = []
+
+    for x in range (0, pins_found):
+        pin_name.append(results[x].description)
+        pin_url.append(results[x].image_large_url)
+        pin_link.append(results[x].link)
+
+    reverse_lists(pin_name, pin_url, pin_link)
+
+    if pins_found == 0 :
+    	return render(request, 'recipes.html', {'empty': True})
+    else :
+    	return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'links': pin_link, 'quartile': range(0, pins_found)})
+
+def reverse_lists(pin_name, pin_url, pin_link):
+	pin_name.reverse()
+	pin_url.reverse()
+	pin_link.reverse()
+
+
+
+
+
+
+
+
+
+
+
+	
