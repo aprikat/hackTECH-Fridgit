@@ -61,8 +61,6 @@ def get_food(request):
 
 	
 def index(request):
-	if request.user:
-		food = get_food(request)
 	return render(request, 'index.html')
 
 def signup(request):
