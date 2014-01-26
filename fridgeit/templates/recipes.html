@@ -72,15 +72,13 @@
         <thead>
               <th>Image</th>
               <th>Recipe</th>
-              <th>Ingredients</th>
               <th>Match</th>
           </thead>
           <tbody>
               {% for x in quartile %}
                <tr>
-                <td>{{ urls.pop }}
+                <td><img src="{{urls.pop}}"></td>
                 <td>{{ names.pop }}</td>
-                <td>Ingredient</td>
                 <td>99 %</td>
               </tr>
               {% endfor %}
