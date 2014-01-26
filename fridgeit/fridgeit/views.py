@@ -10,6 +10,7 @@ from django.core import serializers
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
+from django.contrib.auth.hashers import make_password
 import pinterest.search as search
 
 CLIENT_ID = "1435790"
@@ -67,10 +68,14 @@ def validate(request):
 		email = request.POST.get('email')
 		print username, fullname, email
 		fname,lname = fullname.split(" ")
-		newuser= User(username=username, first_name = fname, last_name = lname, email = email)
-		newuser.make_pasword(password)
+		newuser= User()
+		newuser.first_name = fname
+		newuser.last_name = lname
+		newuser.email = email
+		newuser.username = username
+		newuser.password = make_password(password)
 		newuser.save()
-		print newuser.first_name, newuser.last_name
+		print newuser.last_name, newuser.username, newuser.email,newuser.first_name 
 		print "Registered {}".format(newuser.username)
 		return HttpResponseRedirect('/index')
 	return HttpResponseRedirect('/')
