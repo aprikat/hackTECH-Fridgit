@@ -56,7 +56,6 @@ def get_food(request):
 	print "Response is: " + response
 	return HttpResponse(response, mimetype="application/json")
 
-	
 def index(request):
 	if request.user:
 		food = get_food(request)
@@ -85,6 +84,20 @@ def validate(request):
 		print "Registered {}".format(newuser.username)
 		return HttpResponseRedirect('/index')
 	return HttpResponseRedirect('/')
+
+def delete_food(request):
+	foodId = request.POST.get('food_id')
+	food = Food.objects.get(id = foodId)
+	food.delete()
+	return render(request, 'index.html')
+
+def add_food(request):
+	name = request.POST.get('food_name')
+	quantity = request.POST.get('quantity')
+	userId = request.POST.get('user_id')
+	u = User.objects.get(id = userId)
+	f = Food(name = name, quantity = quantity, user = u)
+	f.save()
 
 def get_recipe(request):
 	#get ingredients
