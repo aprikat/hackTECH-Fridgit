@@ -146,6 +146,9 @@
                       ingredients.push(thing);
                   }
               });
+              if (ingredients.length == 0) {
+                alert("You didn't select anything! Well let's show you some tasty recipes anyway...")
+              }
               if (ingredients.length > 5) {
                 alert("That's a lot of items! Let's give it a shot...");
               }
