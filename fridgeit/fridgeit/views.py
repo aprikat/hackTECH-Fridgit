@@ -30,7 +30,7 @@ def login(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				return HttpResponseRedirect(reverse('index'))
+				return HttpResponseRedirect('index')
 	return HttpResponseRedirect('/')
 
 def logout_page(request):
@@ -44,9 +44,6 @@ def login(request):
 	
 def index(request):
 	return render(request, 'index.html')
-
-def signup(request):
-	return render(request, 'signup.html')
 
 def signup(request):
 	return render(request, 'signup.html')
