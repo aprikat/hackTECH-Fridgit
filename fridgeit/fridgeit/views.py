@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import logout, login, authenticate
 from django.http import HttpResponseRedirect
 from fridgeit.models import User
-from pinterest.models.model import Pinterest
+from pinterest.models.model import Pinterest, User
 import pinterest.search as search
 
 CLIENT_ID = "1435790"
@@ -47,5 +47,10 @@ def signup(request):
 
 def get_recipe(request):
 	#Pinterest API calls (or Food 2 Fork)
-	result = search.user_pin("kittens")
-	return render(request, 'recipes.html')
+	results = search.pins(query="fudge", rich_type="recipe", rich_query="chocolate, strawberries, and cream")
+	pin_name = []
+	pin_url = []
+	for x in range (0, 25):
+		pin_name.append(results[x].description)
+		pin_url.append(results[x].image_large_url)
+	return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'quartile': range(0, 25)})
