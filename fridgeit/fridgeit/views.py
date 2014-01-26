@@ -60,7 +60,7 @@ def validate(request):
 		fullname = request.POST.get('name')
 		password = request.POST.get('password')
 		email = request.POST.get('email')
-		print username
+		print username, fullname, email
 		fname,lname = fullname.split(" ")
 		newuser= User(username=username, first_name = fname, last_name = lname, email = email)
 		newuser.make_pasword(password)
