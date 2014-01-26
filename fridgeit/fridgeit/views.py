@@ -105,7 +105,7 @@ def search_pins(ingredients, size):
 def copy_results(results, pin_name, pin_url, pin_link):
 	for x in range (0, len(results)):
 		pin_name.append(results[x].description)
-		pin_url.append(results[x].image_medium_url)
+		pin_url.append(results[x].image_large_url)
 		pin_link.append(results[x].link)
 
 def calculate_match(results, pin_match, num_ing, num_search):
