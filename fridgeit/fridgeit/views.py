@@ -25,7 +25,6 @@ def userlogin(request):
 	if request.method =="POST":
 		username = request.POST.get('username')
 		password = request.POST.get('password')
-#		username = get_user(email)		
 		print username
 		user = authenticate(username = username, password=password)
 		if user is not None:
@@ -46,11 +45,27 @@ def signup(request):
 	return render(request, 'signup.html')
 
 def get_recipe(request):
-	#Pinterest API calls (or Food 2 Fork)
-	results = search.pins(query="fudge", rich_type="recipe", rich_query="chocolate, strawberries, and cream")
+	#get ingredients
+	ingredients = ['chocolate', 'strawberry', 'cream']
+	size = len(ingredients)
+	query = ""
+	
+	#convert ingredients to string query
+	for i in range(0, size):
+		query = query + ingredients[i]
+
+	#prepare search results	
+	results = search.pins(query="fudge", rich_type="recipe", rich_query=query)
 	pin_name = []
 	pin_url = []
+	
+	#convert results to be used in recipes.html
 	for x in range (0, 25):
 		pin_name.append(results[x].description)
-		pin_url.append(results[x].image_large_url)
+		pin_url.append(results[x].image_medium_url)
+
 	return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'quartile': range(0, 25)})
+
+
+
+
