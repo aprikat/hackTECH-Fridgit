@@ -88,13 +88,15 @@
               <th></th>
           </thead>
           <tbody>
+	    <form class="navbar-form pull-right" method="post" action={% url "add_food" %}> {% csrf_token %}
             <tr>
               <td></td>
-              <td><input type="text" placeholder="New item" id="new_item_name"></input></td>
-              <td><input type="text" placeholder="Quantity" id="new_item_quant"></input></td>
+              <td><input type="text" placeholder="New item" name="food_name" id="new_item_name"></input></td>
+              <td><input type="text" placeholder="Quantity" name="quantity" id="new_item_quantity"></input></td>
               <td><input type="text" placeholder="Date purchased" id="new_item_date"></input></td>
               <td><a href="#" class="btn btn-small" id="addnew" onclick="populate_new();">Add</a></td>
             </tr>
+            </form>
               <tr>
                 <td><input type="checkbox" id="ch1" class="recipe_list"></td>
                 <td class="item">Jose Cuervo</td>
