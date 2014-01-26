@@ -65,7 +65,27 @@
       </div>
     </div>
   <div class="container">
-    
+    <form role="form" method="post" action={% url "signup" %}>
+{% csrf_token %}
+              <div class="form-group">
+                 <label for="name">Full name</label>
+                 <input type="text" class="form-control" id="name" placeholder="Sharkeshia Jaws">
+               </div>
+               <div class="form-group">
+                 <label for="email">Email address</label>
+                 <input type="email" class="form-control" id="email" placeholder="april@sleepdeprived.com">
+               </div>
+               <div class="form-group">
+                 <label for="username">Username</label>
+                 <input type="username" class="form-control" id="username" placeholder="creative username">
+               </div>
+ 
+               <div class="form-group">
+                 <label for="password">Password</label>
+                 <input type="password" class="form-control" id="password" placeholder="help911">
+               </div>
+             <button value="submit"  class="btn btn-success">Register</a>
+             </form>
     </div>
 
 
