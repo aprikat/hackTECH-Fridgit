@@ -25,6 +25,9 @@
       font-color: #FFFFFF;
       }
       h4 .btn { display: inline-block; }
+      .btn-small {
+        width:50px;
+      }
     </style>
 
 
@@ -76,7 +79,6 @@
           <div class="row"><h3>Fridgit Inventory for {{ user }}</h3></div>
           <table class="table table-hover" id="food_table">
         <thead>
-              <th></th>
               <th>Item</th>
               <th>Quantity</th>
               <th>Purchase date</th>
@@ -84,7 +86,6 @@
           </thead>
           <tbody>
             <tr>
-              <td></td>
               <td><input type="text" placeholder="New item" id="new_item_name"></input></td>
               <td><input type="text" placeholder="Quantity" id="new_item_quant"></input></td>
               <td><input type="text" placeholder="Date purchased" id="new_item_date"></input></td>
@@ -178,7 +179,6 @@
               cell3.innerHTML = q;
               cell4.innerHTML = d;
               cell5.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
-            
           }
         </script>
 </body>
