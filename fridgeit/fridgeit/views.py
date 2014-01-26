@@ -21,15 +21,17 @@ def get_user(email):
     except User.DoesNotExist:
         return None
 
-def login(request):
+def userlogin(request):
 	if request.method =="POST":
-		email = request.POST.get('email')
+		username = request.POST.get('username')
 		password = request.POST.get('password')
-		username = get_user(email)		
+#		username = get_user(email)		
+		print username
 		user = authenticate(username = username, password=password)
 		if user is not None:
 			if user.is_active:
 				login(request, user)
+				print "logged {} in ".format(user.username)
 				return HttpResponseRedirect('index')
 	return HttpResponseRedirect('/')
 
@@ -37,11 +39,6 @@ def logout_page(request):
 	logout(request)
 	return HttpResponseRedirect('/')
 
-def login(request):
-	print "The number of users in the table is: "
-	print len(User.objects.all());
-	return HttpResponseRedirect('/index.html')
-	
 def index(request):
 	return render(request, 'index.html')
 
