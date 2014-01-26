@@ -53,13 +53,10 @@ def logout_page(request):
 	logout(request)
 	return HttpResponseRedirect('/')
 
-<<<<<<< HEAD
-=======
 def index(request):
 	usr = request.user
 	return render(request, 'index.html', {'user': usr})
 
->>>>>>> origin/april
 def signup(request):
 	return render(request, 'signup.html')
 
