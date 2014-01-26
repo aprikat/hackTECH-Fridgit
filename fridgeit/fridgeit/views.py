@@ -46,8 +46,8 @@ def signup(request):
 
 def get_recipe(request):
 	#get ingredients
-	ingredients = ['chocolate', 'strawberry', 'cream']
-	#ingredients = ['avocado', 'egg', 'milk', 'chocolate', 'strawberry']
+	#ingredients = ['chocolate', 'strawberry', 'cream']
+	ingredients = ['avocado', 'egg', 'milk', 'chocolate', 'strawberry']
 	size = len(ingredients)
 	
 	#convert ingredients to string query
