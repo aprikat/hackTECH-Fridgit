@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from django.contrib.auth import logout, login, authenticate
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from fridgeit.models import User
 from pinterest.models.model import Pinterest, User
 from fridgeit.models import Food
+#from fridgeit.models import User
+from django.contrib.auth.models import User
 from pinterest.models.model import Pinterest
 from django.core import serializers
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
+from django.contrib.auth.hashers import make_password
 import pinterest.search as search
 
 CLIENT_ID = "1435790"
@@ -16,21 +20,17 @@ CLIENT_SECRET = "8c8eab09fe710377c9e879872855109c9f349195"
 Pinterest.configure_client(CLIENT_ID, CLIENT_SECRET)
 
 from django.core.urlresolvers import reverse
-from fridgeit.models import User
-
+from django.contrib.auth.models import User
 def home(request):
 	return render(request, 'landing.html')
 
-def get_user(email):
-    try:
-        return User.objects.get(email=email.lower())
-    except User.DoesNotExist:
-        return None
 
 def userlogin(request):
 	if request.method =="POST":
+		print request.POST
 		username = request.POST.get('username')
 		password = request.POST.get('password')
+#		username = get_user(email)		
 		print username
 		user = authenticate(username = username, password=password)
 		if user is not None:
@@ -44,9 +44,6 @@ def logout_page(request):
 	logout(request)
 	return HttpResponseRedirect('/')
 
-def index(request):
-	return render(request, 'index.html')
-
 def signup(request):
 	return render(request, 'signup.html')
 
@@ -56,6 +53,34 @@ def get_food(request):
 	response = serializers.serialize('json', foods, fields=('name','quantity'))
 	print "Response is: " + response
 	return HttpResponse(response, mimetype="application/json")
+
+	
+def index(request):
+	return render(request, 'index.html')
+
+def signup(request):
+	return render(request, 'signup.html')
+
+def validate(request):
+	if request.method =="POST":
+		print(request.POST)
+		username = request.POST.get('username')
+		fullname = request.POST.get('name')
+		password = request.POST.get('password')
+		email = request.POST.get('email')
+		print username, fullname, email
+		fname,lname = fullname.split(" ")
+		newuser= User()
+		newuser.first_name = fname
+		newuser.last_name = lname
+		newuser.email = email
+		newuser.username = username
+		newuser.password = make_password(password)
+		newuser.save()
+		print newuser.last_name, newuser.username, newuser.email,newuser.first_name 
+		print "Registered {}".format(newuser.username)
+		return HttpResponseRedirect('/index')
+	return HttpResponseRedirect('/')
 
 def get_recipe(request):
 	#get ingredients
@@ -91,7 +116,9 @@ def get_recipe(request):
 			return render(request, 'recipes.html', {'empty': True})
 		else :
 			return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'links': pin_link, 'match': pin_match, 'quartile': range(0, len(results)), 'empty': False})
-
+	#Pinterest API calls (or Food 2 Fork)
+	#result = search.user_pin("kittens")
+	return render(request, 'recipes.html')
 def search_pins(ingredients, size):
 	#convert ingredients to string query
 	query = ""
@@ -133,3 +160,4 @@ def reverse_lists(pin_name, pin_url, pin_link, pin_match):
 
 
 
+	
