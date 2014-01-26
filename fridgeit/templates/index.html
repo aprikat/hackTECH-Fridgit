@@ -91,14 +91,14 @@
                 <td class="item">Jose Cuervo</td>
                 <td>2</td>
                 <td>Never</td>
-                <td><a href="#" class="btn btn-small" class="delete">Delete</a></td>
+                <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
               </tr>
               <tr>
                 <td><input type="checkbox" id="ch2" class="recipe_list"></td>
                 <td class="item">Dead dove</td>
                 <td>1</td>
                 <td>Do not eat</td>
-                <td><a href="#" class="btn btn-small" class="delete">Delete</a></td>
+                <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
               </tr>
         </tbody>
       </table>
@@ -125,16 +125,17 @@
                 alert("Sorry, please limit your selection to 5 items!");
               else 
                 return ingredients;
-            });
-
-            
-              $(".delete").live('click', function(event) {
-                $(this).parent().parent().remove();             
-            });
+            });            
           });
         </script>
 
-
+        <script type="text/javascript">
+        $(document).ready(function(){
+          $('#food_table').on('click', '#delete', function(){
+              $(this).closest ('tr').remove ();
+          });
+        });
+        </script>
         <script type="text/javascript">
           function populate_new() {
             var table = document.getElementById("food_table");
@@ -151,7 +152,7 @@
             cell2.innerHTML = n;
             cell3.innerHTML = q;
             cell4.innerHTML = d;
-            cell5.innerHTML = "<a href=\"#\" class=\"btn btn-small\" class=\"delete\">Delete</a>";
+            cell5.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
           }
         </script>
 </body>
