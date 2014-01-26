@@ -47,24 +47,38 @@ def signup(request):
 def get_recipe(request):
 	#get ingredients
 	ingredients = ['chocolate', 'strawberry', 'cream']
+	#ingredients = ['avocado', 'egg', 'milk', 'chocolate', 'strawberry']
 	size = len(ingredients)
-	query = ""
 	
 	#convert ingredients to string query
+	query = ""
 	for i in range(0, size):
-		query = query + ingredients[i]
+		query = query + ingredients[i] + " "
 
 	#prepare search results	
-	results = search.pins(query="fudge", rich_type="recipe", rich_query=query)
+	results = search.pins(query="fudge", rich_type="recipe", rich_query=query, restrict="food_drink", boost="quality")
 	pin_name = []
 	pin_url = []
-	
-	#convert results to be used in recipes.html
-	for x in range (0, 25):
-		pin_name.append(results[x].description)
-		pin_url.append(results[x].image_medium_url)
 
-	return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'quartile': range(0, 25)})
+	print(len(results))
+
+	if len(results)>0 :
+		#convert results to be used in recipes.html
+		for x in range (0, len(results)):
+			pin_name.append(results[x].description)
+			pin_url.append(results[x].image_medium_url)
+
+		print(pin_url)
+		return render(request, 'recipes.html', {'names': pin_name, 'urls': pin_url, 'quartile': range(0, len(results)), 'empty': False})
+	else :
+		return render(request, 'recipes.html', {'empty': True})
+
+
+
+
+
+
+
 
 
 

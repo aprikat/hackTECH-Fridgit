@@ -66,21 +66,25 @@
   <div class="container">
     <div class="row">
         <div class="span10 offset1">
-          <h3>Recipes You Can Try</h3>
-          <table class="table table-hover">
-        <thead>
-              <th>Image</th>
-              <th>Recipe</th>
-              <th>Match</th>
-          </thead>
-          <tbody>
-              {% for x in quartile %}
-               <tr>
-                <td><img src="{{urls.pop}}"></td>
-                <td>{{ names.pop }}</td>
-                <td>99 %</td>
-              </tr>
-              {% endfor %}
+          {% if empty %}
+              <h3>We're sorry, your search didn't return any results.</h3>
+            {% else %}
+              <h3>Recipes You Can Try</h3>
+              <table class="table table-hover">
+              <thead>
+                <th>Image</th>
+                <th>Recipe</th>
+                <th>Match</th>
+              </thead>
+              <tbody>
+                {% for x in quartile %}
+                  <tr>
+                    <td><img src="{{urls.pop}}" class="img-rounded"></td>
+                    <td>{{ names.pop }}</td>
+                    <td>99 %</td>
+                  </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
       </table>
       </div>
