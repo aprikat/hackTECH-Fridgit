@@ -61,10 +61,9 @@
               <li></li>
             </ul>
             <form class="navbar-form pull-right" method="post" action={% url "login" %}> {% csrf_token %}
-              <input class="span2" type="text" name="email" placeholder="FakeEmail">
-              <input class="span2" type="password" name="password" placeholder="FakePassword">
+              <input class="span2" type="text" name="username" placeholder="Username">
+              <input class="span2" type="password" name="password" placeholder="Password">
                <button type="submit" class="btn">Sign in</button> 
-    <!--       <a href={% url "login" %} class="btn" type="submit">Sign in</a>-->
             </form>
           </div><!--/.nav-collapse -->
         </div>
@@ -90,7 +89,7 @@
              <h4 class="modal-title" id="myModalLabel">Sign up for Fridgit</h4>
            </div>
            <div class="modal-body">
-             <form role="form">
+             <form role="form" action="/signup" method="post">
               <div class="form-group">
                  <label for="name">Full name</label>
                  <input type="text" class="form-control" id="name" placeholder="Sharkeshia Jaws">
@@ -107,7 +106,7 @@
            </div>
            <div class="modal-footer">
              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-             <a href="#" class="btn btn-success">Sign up</a>
+             <button href="#" class="btn btn-success">Sign up</button>
            </div>
          </div><!-- /.modal-content -->
        </div><!-- /.modal-dialog -->
@@ -130,7 +129,7 @@
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'jquery.backstretch.min.js' %}"></script>
         <script type="text/javascript">
-        $.backstretch("{% static 'kebabs.jpg' %}");
+        $.backstretch("{% static 'eat-food-fruits-pictures-orangeis_and_lemons.jpg' %}");
         </script>
 </body>
 </html>
