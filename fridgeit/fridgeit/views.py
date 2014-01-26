@@ -47,8 +47,8 @@ def signup(request):
 def get_recipe(request):
 	#get ingredients
 	#ingredients = ['chocolate', 'strawberry', 'cream']
-	#ingredients = ['avocado', 'chocolate', 'lettuce']
-	ingredients = ['egg', 'pineapple', 'lettuce', 'vodka', 'dog food', 'unicorn']
+	ingredients = ['avocado', 'chocolate', 'lettuce']
+	#ingredients = ['egg', 'pineapple', 'lettuce', 'vodka', 'dog food', 'unicorn']
 	size = len(ingredients)
 	pin_name = []
 	pin_url = []
