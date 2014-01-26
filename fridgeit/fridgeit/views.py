@@ -48,7 +48,9 @@ def signup(request):
 	return render(request, 'signup.html')
 
 def get_food(request):
-	userId = request.GET.get('user_id')
+	user = User.objects.filter(username=request.user)
+	print user, user[0], user[0].id
+	userId = user[0].id
 	foods = Food.objects.filter(user=userId)
 	response = serializers.serialize('json', foods, fields=('name','quantity'))
 	print "Response is: " + response
@@ -56,6 +58,8 @@ def get_food(request):
 
 	
 def index(request):
+	if request.user:
+		food = get_food(request)
 	return render(request, 'index.html')
 
 def signup(request):
