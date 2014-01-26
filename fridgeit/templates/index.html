@@ -66,6 +66,7 @@
             <form class="navbar-form pull-right">
               <!--<a href={% url "login" %} class="btn">Sign in</a> -->
               <ul class="nav">
+              <li><a>Welcome, {{ user }}!</a></li>
               <li><a href="landing.html">Log Out</a></li>
             </ul>
             </form>
@@ -76,8 +77,11 @@
   <div class="container">
     <div class="row">
         <div class="span10 offset1">
-          <div class="row"><h3>Fridgit Inventory for {{ user }}</h3></div>
+          <div class="row"><h3>Fridgit Inventory {{ user }}</h3></div>
+          <form id="checkbox_form" action="/recipes/" method="post">{% csrf_token %}
+            {{ form.as_p }}
           <table class="table table-hover" id="food_table">
+
         <thead>
               <th>Item</th>
               <th>Quantity</th>
@@ -85,6 +89,7 @@
               <th></th>
           </thead>
           <tbody>
+            
             <tr>
               <td><input type="text" placeholder="New item" id="new_item_name"></input></td>
               <td><input type="text" placeholder="Quantity" id="new_item_quant"></input></td>
@@ -92,54 +97,68 @@
               <td><a href="#" class="btn btn-success" id="addnew" onclick="populate_new()" style="width:30px">Add</a></td>
             </tr>
               <tr>
-                <td><input type="checkbox" id="ch1" class="recipe_list"></td>
-                <td class="item">Eggs</td>
-                <td>1 dozen</td>
-                <td>01/20/14</td>
+                <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Chicken breast</label></div></td>
+                <td>2</td>
+                <td>1/20/14</td>
                 <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
               </tr>
               <tr>
-                <td><input type="checkbox" id="ch2" class="recipe_list"></td>
-                <td class="item">Milk</td>
-                <td>1 gallon</td>
-                <td>01/20/14</td>
+                <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Paprika</label></div></td>
+                <td>1</td>
+                <td>1/1/11</td>
                 <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
               </tr>
+              <tr>
+                <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Kale</label></div></td>
+                <td>2</td>
+                <td>1/25/14</td>
+                <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
+              </tr>
+              <tr>
+                <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Peanut butter</label></div></td>
+                <td>1</td>
+                <td>12/20/13</td>
+                <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
+              </tr>
+
         </tbody>
       </table>
-
-      <div class="row" align="center">
-        
-        <a href="recipes.html" type="submit" value="Find recipes!" class="btn btn-danger" id="get_recipe">Find recipes!</a>
-      
-      </div>
+      <input type="hidden" id="hidden_ings" name="ingreds" value="">
+      <div class="row" align="center"><input type="submit" class="btn btn-danger" id="get_recipe" value="Find recipes!"></div>
+    </form> <!-- ends the checkbox form -->
     </div>
     </div>
     </div>
-
-
-         <script type="text/javascript">
-           $(document).ready(function(){
-             $("#get_recipe").click(function() {
-               var ingredients = new Array();
-               $('tr .recipe_list').each(function() {
-                   if(this.checked) {
-                       var td = $(this).parent().parent().html();
-                       var nextd = $(td).next().html();
-                       ingredients.push(nextd);
-                   }
-               });
-               if (ingredients.length > 5)
-                 alert("Sorry, please limit your selection to 5 items!");
-               else {
-                 var url = '/recipes';
-                 //$.post(url, { ingredients: ingredients, csrfmiddlewaretoken: csrftoken });
-                 //make post request here
-               }
-
-             });            
-           });
-         </script>
+        <script src="{% static 'bootstrap/js/jquery-1.10.2.min.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $("#get_recipe").click(function() {
+              var ingredients = new Array();
+              $('tr .recipe_list').each(function() {
+                  if(this.checked) {
+                      //var td = $(this).parent().parent().html();
+                      //var nextd = $(td).next().html();
+                      //ingredients.push(nextd);
+                      var val = $(this).parent().html();
+                      var val_s = val.toString();
+                      var thing = val_s.split(">")[1];
+                      ingredients.push(thing);
+                  }
+              });
+              if (ingredients.length > 5) {
+                alert("Sorry, please limit your selection to 5 items!");
+              }
+              else {
+                ing_string = ingredients.toString();
+                document.getElementById("hidden_ings").value = ing_string;
+                document.getElementById("hidden_ings").innerHTML = ing_string;
+                $("#hidden_ings").text(ing_string);
+                alert(ing_string);
+              }
+            });            
+          });
+        </script>
 
         <script type="text/javascript">
         $(document).ready(function(){

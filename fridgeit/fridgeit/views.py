@@ -101,11 +101,14 @@ def validate(request):
 	return HttpResponseRedirect('/')
 
 def get_recipe(request):
-	if request.method == 'POST':
-		print(request.params.ingredients)
-	#get ingredients
+	print request.POST
+	ingredients = request.POST.get("ingreds")
+	print ingredients
+
+	results = search.pins(query="chicken", rich_type="recipe", rich_query=ingredients)
+
 	#ingredients = ['chocolate', 'strawberry', 'cream']
-	ingredients = ['avocado', 'chocolate', 'lettuce']
+	#ingredients = ['avocado', 'chocolate', 'lettuce']
 	#ingredients = ['egg', 'pineapple', 'lettuce', 'vodka', 'dog food', 'unicorn']
 	size = len(ingredients)
 	pin_name = []
