@@ -69,8 +69,13 @@ def get_food(request):
 	return HttpResponse(response, mimetype="application/json")
 
 def get_recipe(request):
+	print request.POST
+	ingredients = request.POST.get("ingreds")
+	print ingredients
+
 	#Pinterest API calls (or Food 2 Fork)
-	results = search.pins(query="fudge", rich_type="recipe", rich_query="chocolate, strawberries, and cream")
+	#results = search.pins(query="fudge", rich_type="recipe", rich_query="chocolate, strawberries, and cream")
+	results = search.pins(query="chicken", rich_type="recipe", rich_query=ingredients)
 	pin_name = []
 	pin_url = []
 	for x in range (0, 25):
