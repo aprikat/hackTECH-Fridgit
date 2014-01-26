@@ -3,6 +3,12 @@ from django.contrib.auth import logout, login, authenticate
 from django.http import HttpResponseRedirect
 from fridgeit.models import User
 from pinterest.models.model import Pinterest, User
+from fridgeit.models import Food
+from pinterest.models.model import Pinterest
+from django.core import serializers
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.template.context import RequestContext
 import pinterest.search as search
 
 CLIENT_ID = "1435790"
@@ -44,6 +50,13 @@ def index(request):
 
 def signup(request):
 	return render(request, 'signup.html')
+
+def get_food(request):
+	userId = request.GET.get('user_id')
+	foods = Food.objects.filter(user=userId)
+	response = serializers.serialize('json', foods, fields=('name','quantity'))
+	print "Response is: " + response
+	return HttpResponse(response, mimetype="application/json")
 
 def get_recipe(request):
 	#Pinterest API calls (or Food 2 Fork)
