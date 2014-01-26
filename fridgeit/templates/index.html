@@ -89,38 +89,14 @@
               <th></th>
           </thead>
           <tbody>
-            
+            <form method="post" action={% url "add_food" %}> {% csrf_token %}
             <tr>
-              <td><input type="text" placeholder="New item" id="new_item_name"></input></td>
-              <td><input type="text" placeholder="Quantity" id="new_item_quant"></input></td>
+              <td><input type="text" placeholder="New item" name="food_name" id="new_item_name"></input></td>
+              <td><input type="text" placeholder="Quantity" name="quantity" id="new_item_quant"></input></td>
               <td><input type="text" placeholder="Date purchased" id="new_item_date"></input></td>
               <td><a href="#" class="btn btn-success" id="addnew" onclick="populate_new()" style="width:30px">Add</a></td>
             </tr>
-              <tr>
-                <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Chicken breast</label></div></td>
-                <td>2</td>
-                <td>1/20/14</td>
-                <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
-              </tr>
-              <tr>
-                <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Paprika</label></div></td>
-                <td>1</td>
-                <td>1/1/11</td>
-                <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
-              </tr>
-              <tr>
-                <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Kale</label></div></td>
-                <td>2</td>
-                <td>1/25/14</td>
-                <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
-              </tr>
-              <tr>
-                <td><div class="checkbox"><label><input type="checkbox" id="ch1" class="recipe_list">Peanut butter</label></div></td>
-                <td>1</td>
-                <td>12/20/13</td>
-                <td><a href="#" class="btn btn-small" id="delete">Delete</a></td>
-              </tr>
-
+            </form>
         </tbody>
       </table>
       <input type="hidden" id="hidden_ings" name="ingreds" value="">
@@ -162,14 +138,40 @@
             });            
           });
         </script>
-
         <script type="text/javascript">
         $(document).ready(function(){
           $('#food_table').on('click', '#delete', function(){
               $(this).closest ('tr').remove();
           });
         });
-        </script>
+        </script><tr>
+	 <script type="text/javascript">
+         console.log("Sending ajax call");
+         var j = $.ajax({ 
+           type: "GET",
+           dataType: "json",
+           url: "http://localhost:8000/get_food",
+           success: function(data) {
+	     console.log(data);        
+	     for (var i = 0; i < data.length; i++) {
+               var name = data[i].fields.name;
+               var quantity = data[i].fields.quantity;
+               var table = document.getElementById("food_table");
+               var row = table.insertRow(2);
+               var cell1 = row.insertCell(0);
+               var cell2 = row.insertCell(1);
+               var cell3 = row.insertCell(2);
+               var cell4 = row.insertCell(3);
+               var cell5 = row.insertCell(4);
+               cell1.innerHTML = "<input type=\"checkbox\" id=\"recipe_list\" class=\"recipe_list\">";
+               cell2.innerHTML ="<td class='item'>" + name + "</td>";
+               cell3.innerHTML = "<td>" + quantity + "</td>";
+               cell4.innerHTML = " <td>01/20/14</td>";
+               cell5.innerHTML = "<a href=\"#\" class=\"btn btn-small\" id=\"delete\">Delete</a>";
+	     }
+        }
+      });
+	</script>
         <script type="text/javascript">
           function populate_new() {
             var table = document.getElementById("food_table");
@@ -189,8 +191,6 @@
               alert("Sorry, please enter a date of purchase for your item.");
               exit();
             }
-            
-            var row = table.insertRow(2);
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
