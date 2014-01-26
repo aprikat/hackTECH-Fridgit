@@ -46,7 +46,8 @@ def logout_page(request):
 	return HttpResponseRedirect('/')
 
 def index(request):
-	return render(request, 'index.html')
+	usr = request.user
+	return render(request, 'index.html', {'user': usr})
 
 def signup(request):
 	return render(request, 'signup.html')
