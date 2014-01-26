@@ -5,6 +5,8 @@ from django.core.urlresolvers import reverse
 from fridgeit.models import User
 from pinterest.models.model import Pinterest, User
 from fridgeit.models import Food
+#from fridgeit.models import User
+from django.contrib.auth.models import User
 from pinterest.models.model import Pinterest
 from django.core import serializers
 from django.http import HttpResponse
