@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import logout, login, authenticate
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from fridgeit.models import User
+#from fridgeit.models import User
 from pinterest.models.model import Pinterest, User
 from fridgeit.models import Food
 #from fridgeit.models import User
@@ -30,14 +30,17 @@ def userlogin(request):
 		print request.POST
 		username = request.POST.get('username')
 		password = request.POST.get('password')
-#		username = get_user(email)		
-		print username
+		print username, password
+		user= User.objects.filter(username=username)[0]
+		username = user.username
+		password = user.password
 		user = authenticate(username = username, password=password)
 		if user is not None:
 			if user.is_active:
 				login(request, user)
 				print "logged {} in ".format(user.username)
 				return HttpResponseRedirect('/index')
+		print "user is none"
 	return HttpResponseRedirect('/')
 
 def logout_page(request):
@@ -74,16 +77,15 @@ def validate(request):
 		email = request.POST.get('email')
 		print username, fullname, email
 		fname,lname = fullname.split(" ")
-		newuser= User()
+		newuser= User.objects.create_user(username, email) 
 		newuser.first_name = fname
 		newuser.last_name = lname
-		newuser.email = email
-		newuser.username = username
-		newuser.password = make_password(password)
+		newuser.set_password(password)
 		newuser.save()
 		print newuser.last_name, newuser.username, newuser.email,newuser.first_name 
 		print "Registered {}".format(newuser.username)
-		return HttpResponseRedirect('/index')
+
+		return HttpResponseRedirect('/')
 	return HttpResponseRedirect('/')
 
 def get_recipe(request):
