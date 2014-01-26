@@ -58,9 +58,11 @@ def get_food(request):
 	return HttpResponse(response, mimetype="application/json")
 
 def get_recipe(request):
+	if request.method == 'POST':
+		print(request.params.ingredients)
 	#get ingredients
-	#ingredients = ['chocolate', 'strawberry', 'cream']
-	ingredients = ['avocado', 'chocolate', 'lettuce']
+	#ingredients = ['chocolate', 'strawberry', 'cream']'
+	#ingredients = ['avocado', 'chocolate', 'lettuce']
 	#ingredients = ['egg', 'pineapple', 'lettuce', 'vodka', 'dog food', 'unicorn']
 	size = len(ingredients)
 	pin_name = []
