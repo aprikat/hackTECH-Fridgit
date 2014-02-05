@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+-<soap:Envelope xmlns:mit="http://www.miteksystems.com/" xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+<soap:Header/>
+-<soap:Body>
+-<mit:InsertPhoneTransaction>
+<!--Optional:-->
+<mit:userName>tcparker@usc.edu</mit:userName>
+<!--Optional:-->
+<mit:password>ht100USC</mit:password>
+<!--Optional:-->
+<mit:phoneKey>SOAP</mit:phoneKey>
+<!--Optional:--> 
+<mit:orgName>USC</mit:orgName>
+<!--Optional:-->
+<mit:base64Image>_IMG_</mit:base64Image>
+<!--Optional:-->
+<mit:compressionLevel>30</mit:compressionLevel>
+<!--Optional:-->
+<mit:documentIdentifier>CROP_IQA_OCR</mit:documentIdentifier>
+<!--Optional:-->
+<mit:documentHints/>
+<mit:dataReturnLevel>30</mit:dataReturnLevel>
+<mit:returnImageType>0</mit:returnImageType>
+<mit:rotateImage>0</mit:rotateImage>
+<!--Optional:-->
+<mit:note>SoapUI Test</mit:note>
+</mit:InsertPhoneTransaction>
+</soap:Body>
+</soap:Envelope>

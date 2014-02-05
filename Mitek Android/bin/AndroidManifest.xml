@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.fridgeit"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="14" />
+	
+	    
+    <uses-feature android:name="android.hardware.camera"
+    			  android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" /> 
+ 
+        
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.fridgeit.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- This is defined in MiSnap - must have! -->
+        <!-- run in separate process for low memory devices -->
+        <activity android:name="com.miteksystems.misnap.MiSnap"
+                android:theme="@android:style/Theme.NoTitleBar"
+                android:screenOrientation="landscape"
+                android:launchMode="standard"
+                android:process=":MiSnap"
+                android:configChanges="keyboardHidden|orientation">
+        </activity>
+    </application>
+    
+    
+   
+
+</manifest>
